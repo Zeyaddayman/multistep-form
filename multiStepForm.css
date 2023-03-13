@@ -1,0 +1,523 @@
+:root {
+    --marine-blue: hsl(213, 96%, 18%);
+    --purplish-blue: hsl(243, 100%, 62%);
+    --pastel-blue: hsl(228, 100%, 84%);
+    --light-blue: hsl(206, 94%, 87%);
+    --strawberry-red: hsl(354, 84%, 57%);
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: rgb(235, 228, 228);
+    font-family: 'Ubuntu', sans-serif;
+}
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+button {
+    border: none;
+    cursor: pointer;
+}
+.container {
+    padding: 0 20px;
+}
+.step {
+    width: 95%;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+}
+.step-1,
+.step-2,
+.step-3 {
+    display: none;
+}
+.step .content {
+    display: flex;
+    height: 100%;
+    padding: 20px 0;
+}
+.step nav {
+    background-image: url("../IMAGES/bg-sidebar-desktop.svg");
+    background-size: cover;
+    width: 274px;
+    height: 568px;
+    color: white;
+}
+.step nav ul {
+    margin: 20px auto 0 auto;
+    width: 274px;
+}
+.step nav ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    text-transform: uppercase;
+}
+.step nav ul li.active > span {
+    background-color: var(--light-blue);
+    color: var(--marine-blue);
+}
+.step nav ul li > span {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    border: 1px solid white;
+    font-weight: bold;
+}
+.step nav ul li > div span {
+    font-size: 12px;
+    color: var(--pastel-blue);
+}
+.step nav ul li > div p {
+    color: white;
+}
+@media (max-width: 991px) {
+    .step {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(191, 226, 253, 0.1);
+    }
+    .step nav {
+        width: 100%;
+    }
+    .step .content {
+        flex-direction: column;
+        padding: 0;
+    }
+    .step .container {
+        padding: 0;
+    }
+    .step nav {
+        background-image: url("/../IMAGES/bg-sidebar-mobile.svg");
+        width: 100%;
+        height: 172px;
+    }
+    .step nav ul {
+        display: flex;
+        justify-content: center;
+    }
+    .step nav ul li {
+        margin-left: 0;
+    }
+    .step nav ul li div {
+        display: none;
+    }
+}
+/*____________________________________________________*/
+.step section {
+    width: calc(100% - 274px);
+    padding: 0 100px;
+    background-size: cover;
+}
+.step section > div {
+    margin-top: 20px;
+    position: relative;
+    height: 100%;
+}
+.step section .title {
+    margin-bottom: 30px;
+}
+.step section .title p {
+    color: #bbb4b4;
+}
+.step .controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    width: 100%;
+    font-weight: bold;
+}
+.step .controls.small {
+    display: none;
+}
+.step .controls button {
+    width: 115px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    align-items: center;
+    border-radius: 6px;
+    background-color: var(--marine-blue);
+    transition: 150ms;
+    user-select: none;
+}
+.step .controls button.back {
+    color: var(--marine-blue);
+    opacity: 0.7;
+    background-color: transparent;
+}
+.step .controls button.back:hover {
+    opacity: 1;
+}
+.step .controls button.next:hover,
+.step .controls button.confirm:hover {
+    opacity: 0.9;
+}
+.step .controls button.confirm {
+    background-color: var(--purplish-blue);
+}
+@media (max-width: 991px) {
+    .step section {
+        padding: 0 30px;
+        width: 90%;
+        transform: translateY(-15%);
+        background-color: white;
+        margin: 0 auto;
+        border-radius: 6px;
+        height: auto;
+
+    }
+    .step section > div {
+        margin-top: 0;
+        padding: 15px 0;
+    }
+    .step section .controls.big {
+        display: none;
+    }
+    .step .controls.small {
+        display: flex;
+        padding: 15px 20px;
+        background-color: white;
+        bottom: 0;
+    }
+}
+/*________________________________________________________________*/
+.step-0 section form div {
+    padding: 10px 0;
+}
+.step-0 section form div span.required {
+    float: right;
+    color: rgb(211, 75, 75);
+    display: none;
+}
+.step-0 section form div label {
+    margin-bottom: 3px;
+    color: var(--marine-blue);
+    font-weight: bold;
+}
+.step-0 section form div input {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #bbb4b4;
+    margin-top: 5px;
+    border-radius: 6px;
+    color: var(--marine-blue);
+}
+.step-0 section form div input.empty {
+    border-color: rgb(211, 75, 75);
+}
+.step-0 section form div input:focus {
+    outline: none;
+    border-color: var(--marine-blue);
+}
+.step-0 section .controls button.next.no-data {
+    pointer-events: none;
+}
+.step-0 section .controls button.back {
+    visibility: hidden;
+}
+@media (max-width: 991px) {
+    .step-0 section form div {
+        padding: 5px 0;
+    }
+}
+/*______________________________________________________________________*/
+.step-1 .plan {
+    display: flex;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+.step-1 .plan .box {
+    border: 2px solid #eee;
+    padding: 12px;
+    border-radius: 6px;
+    width: 100%;
+    transition: 0.3s;
+}
+.step-1 .plan .box label {
+    cursor: pointer;
+}
+.step-1 .plan input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+}
+.step-1 .plan input[type="radio"]:checked + .box {
+    border-color: var(--purplish-blue);
+    background-color: rgba(191, 226, 253, 0.2);
+}
+.step-1 .plan .box:hover {
+    border-color: var(--purplish-blue);
+}
+.step-1 .plan .box label .icon {
+    margin-bottom: 40px;
+}
+.step-1 .plan .box label .info h4 {
+    margin: 0 0 10px 0;
+    color: var(--marine-blue);
+    font-weight: bold;
+}
+.step-1 .plan .box label .info span {
+    font-size: 14px;
+    color: #bbb4b4;
+}
+.step-1 .plan .box label .info span.year {
+    display: none;
+}
+.step-1 .plan .box label .info .offer {
+    color: var(--marine-blue);
+    margin: 5px 0 0 0;
+}
+.step-1 .options {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    background-color: rgba(191, 226, 253, 0.1);
+    border-radius: 6px;
+    gap: 20px;
+}
+.step-1 .options span {
+    font-weight: bold;
+    color: rgba(2, 42, 90, 0.5);
+}
+.step-1 .options span.active {
+    color: var(--marine-blue);
+}
+.step-1 .toggle-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
+.step-1 .toggle-switch {
+    background-color: #ccc;
+    width: 70px;
+    height: 26px;
+    border-radius: 16px;
+    position: relative;
+    transition: 0.3s;
+    cursor: pointer;
+    background-color: var(--marine-blue);
+}
+.step-1 .toggle-switch::before {
+    content: "";
+    background-color: white;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    border-radius: 50%;
+    top: 13px;
+    left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    transform: translate(-50%, -50%);
+}
+.step-1 .toggle-checkbox:checked + .toggle-switch::before {
+    left: 55px;
+}
+@media (max-width: 991px) {
+    .step-1 .plan {
+        gap: 10px;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    .step-1 .plan .box label {
+        display: flex;
+    }
+    .step-1 .plan .box label .icon {
+        margin: 0 10px 0 0;
+    }
+}
+/*________________________________________________________________*/
+.step-2 .add-ons {
+    gap: 20px;
+}
+.step-2 .add-ons .box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.step-2 .add-ons input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+.step-2 .add-ons .box label {   
+    margin-left: 45px;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    padding: 15px;
+}
+.step-2 .add-ons .box label h4 {
+    font-weight: bold;
+    color: var(--marine-blue);
+    margin: 0 0 10px 0;
+}
+.step-2 .add-ons .box label span {
+    font-size: 14px;
+    color: #bbb4b4;
+}
+.step-2 .add-ons .box .price {
+    margin-right: 10px;
+    color: var(--purplish-blue);
+    font-weight: bold;
+}
+.step-2 input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+.step-2 .add-ons .box label::before,
+.step-2 .add-ons .box label::after {
+    content: "";
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    border-radius: 4px;
+    transition: 0.3s;
+    transform: translateY(-50%);
+}
+.step-2 .add-ons .box label::before {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #bbb4b4;
+}
+.step-2 .add-ons .box:hover {
+    border-color: var(--purplish-blue);
+}
+.step-2 .add-ons .box label::after {
+    font-family: var(--fa-style-family-classic);
+    content: "\f00c";
+    font-weight: 900;
+    width: 25px;
+    height: 25px;
+    background-color: var(--purplish-blue);
+    color: white;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0) translateY(-50%);
+    transition: 0.3s;
+}
+.step-2 .add-ons input:checked + div label::after {
+    transform: scale(1) translateY(-50%);
+}
+.step-2 .add-ons input:checked + div {
+    background-color: rgba(191, 226, 253, 0.2);
+    border-color: var(--purplish-blue);
+}
+@media (max-width: 991px) {
+    .step-2 .add-ons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .step-2 .add-ons .box label {
+        padding: 10px;
+    }
+}
+/*______________________________________________________________________*/
+
+.step-3 .summary {
+    background-color: rgba(191, 226, 253, 0.1);
+    border-radius: 6px;
+}
+.step-3 .summary .plan {
+    padding: 20px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.step-3 .summary .plan .info h4 {
+    color: var(--marine-blue);
+    margin: 0 0 10px 0;
+}
+.step-3 .summary .plan .info button {
+    color: var(--purplish-blue);
+    text-decoration: underline;
+    background-color: transparent;
+}
+.step-3 .summary .plan span {
+    color: var(--marine-blue);
+    font-weight: bold;
+}
+.step-3 .summary .ons {
+    position: relative;
+}
+.step-3 .summary .ons::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: -5px;
+    height: 1px;
+    background-color: rgba(191, 226, 253, 0.3);
+    width: 95%;
+}
+.step-3 .summary .ons p {
+    padding: 8px 15px;
+    margin: 5px 0;
+    color: #ccc;
+    display: flex;
+    justify-content: space-between;
+}
+.step-3 .summary .ons p span {
+    color: var(--marine-blue);
+}
+.step-3 .total {
+    display: flex;
+    padding: 0 15px;
+}
+.step-3 .total p {
+    width: 100%;
+    color: #ccc;
+}
+.step-3 .total span.total-price {
+    float: right;
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--purplish-blue);
+}
+.step-3 div.thank-you {
+    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 80%;
+    display: none;
+}
+.step-3 div.thank-you .image {
+    margin: 0 auto 20px;
+}
+.step-3 div.thank-you h1 {
+    font-size: 35px;
+    font-weight: bold;
+    color: var(--marine-blue);
+}
+.step-3 div.thank-you p {
+    color: #bbb4b4;
+}
+@media (max-width: 991px) {
+    .step-3 div.thank-you {
+        min-height: 400px;
+    }
+}
