@@ -44,7 +44,7 @@ button {
     padding: 20px 0;
 }
 .step nav {
-    background-image: url("../IMAGES/bg-sidebar-desktop.svg");
+    background-image: url("../imgs/bg-sidebar-desktop.svg");
     background-size: cover;
     width: 274px;
     height: 568px;
@@ -100,7 +100,7 @@ button {
         padding: 0;
     }
     .step nav {
-        background-image: url("/../IMAGES/bg-sidebar-mobile.svg");
+        background-image: url("/../imgs/bg-sidebar-mobile.svg");
         width: 100%;
         height: 172px;
     }
