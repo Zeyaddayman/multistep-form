@@ -17,6 +17,9 @@ ul {
     margin: 0;
     list-style: none;
 }
+a {
+    text-decoration: none;
+}
 button {
     border: none;
     cursor: pointer;
@@ -515,6 +518,9 @@ button {
 }
 .step-3 div.thank-you p {
     color: #bbb4b4;
+}
+.step-3 div.thank-you span.copyright a {
+    color: var(--purplish-blue);
 }
 @media (max-width: 991px) {
     .step-3 div.thank-you {
