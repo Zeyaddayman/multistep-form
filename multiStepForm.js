@@ -1,14 +1,14 @@
-let steps = document.querySelectorAll(".step");
-let infoInputs = document.querySelectorAll(".step-0 section form div input");
-let controlBtns = document.querySelectorAll(".control-btn");
-let optionsCheckBox = document.querySelector(".step-1 .options label input");
-let planOffers = document.querySelectorAll(".step-1 .plan .box label .info .offer");
-let planOptions = document.querySelectorAll(".options span");
-let allPrices = document.querySelectorAll("span.price");
-let summaryPlan = document.querySelector(".step-3 .summary .plan .info h4")
-let summaryPlanPrice = document.querySelector(".step-3 .summary .plan .price");
-let summaryOns = document.querySelector(".step-3 .summary .ons");
-let total = document.querySelector(".step-3 .total");
+const steps = document.querySelectorAll(".step");
+const infoInputs = document.querySelectorAll(".step-0 section form div input");
+const controlBtns = document.querySelectorAll(".control-btn");
+const optionsCheckBox = document.querySelector(".step-1 .options label input");
+const planOffers = document.querySelectorAll(".step-1 .plan .box label .info .offer");
+const planOptions = document.querySelectorAll(".options span");
+const allPrices = document.querySelectorAll("span.price");
+const summaryPlan = document.querySelector(".step-3 .summary .plan .info h4")
+const summaryPlanPrice = document.querySelector(".step-3 .summary .plan .price");
+const summaryOns = document.querySelector(".step-3 .summary .ons");
+const total = document.querySelector(".step-3 .total");
 
 const user = {};
 
@@ -52,19 +52,19 @@ infoInputs.forEach((input) => {
 function checkInput (input) {
     let span = document.querySelector(`.step-0 section form .${input.parentElement.className} span.required`);
     if (input.value.length < 1) {
-        input.classList.add("empty");
         span.style.display = "inline";
+        input.setAttribute("required", "");
         input.classList.remove("ready");
     } else {
-        input.classList.remove("empty");
         span.style.display = "none";
+        input.removeAttribute("required");
         input.classList.add("ready");
     }
-    let btn = document.querySelector(".step-0 section .controls button.next");
-    if (document.querySelectorAll(".step-0 section form div input.ready").length === infoInputs.length) {
-        btn.style.pointerEvents = "inherit";
+    let readyInputs = document.querySelectorAll(".step-0 section form div input.ready");
+    if (readyInputs.length === document.querySelectorAll(".step-0 section form div input").length) {
+        controlBtns[1].removeAttribute("disabled");
     } else {
-        btn.style.pointerEvents = "none";
+        controlBtns[1].setAttribute("disabled", "")
     }
 }
 
@@ -168,6 +168,5 @@ function sendData () {
     document.querySelector(".step-3 section div.thank-you").style.display = "flex";
     document.querySelector(".step-3 section div.finish").style.display = "none";
     showstep(document.querySelector(`.step-3`));
-    document.querySelector(".step-3 .small").style.display = "none";
     console.log(user);
 }

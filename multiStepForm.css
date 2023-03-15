@@ -144,9 +144,6 @@ button {
     width: 100%;
     font-weight: bold;
 }
-.step .controls.small {
-    display: none;
-}
 .step .controls button {
     width: 115px;
     height: 44px;
@@ -189,15 +186,6 @@ button {
         margin-top: 0;
         padding: 15px 0;
     }
-    .step section .controls.big {
-        display: none;
-    }
-    .step .controls.small {
-        display: flex;
-        padding: 15px 20px;
-        background-color: white;
-        bottom: 0;
-    }
 }
 /*________________________________________________________________*/
 .step-0 section form div {
@@ -222,15 +210,12 @@ button {
     border-radius: 6px;
     color: var(--marine-blue);
 }
-.step-0 section form div input.empty {
+.step-0 section form div input:required {
     border-color: rgb(211, 75, 75);
 }
 .step-0 section form div input:focus {
     outline: none;
     border-color: var(--marine-blue);
-}
-.step-0 section .controls button.next.no-data {
-    pointer-events: none;
 }
 .step-0 section .controls button.back {
     visibility: hidden;
@@ -509,7 +494,7 @@ button {
     display: none;
 }
 .step-3 div.thank-you .image {
-    margin: 0 auto 20px;
+    margin: 0 auto;
 }
 .step-3 div.thank-you h1 {
     font-size: 35px;
