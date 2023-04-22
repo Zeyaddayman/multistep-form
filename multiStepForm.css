@@ -186,6 +186,11 @@ button {
         margin-top: 0;
         padding: 15px 0;
     }
+    .step .controls {
+        position: initial;
+        bottom: 0;
+        margin-top: 30px;
+    }
 }
 /*________________________________________________________________*/
 .step-0 section form div {

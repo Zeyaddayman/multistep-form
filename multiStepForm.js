@@ -53,18 +53,16 @@ function checkInput (input) {
     let span = document.querySelector(`.step-0 section form .${input.parentElement.className} span.required`);
     if (input.value.length < 1) {
         span.style.display = "inline";
-        input.setAttribute("required", "");
         input.classList.remove("ready");
     } else {
         span.style.display = "none";
-        input.removeAttribute("required");
         input.classList.add("ready");
     }
     let readyInputs = document.querySelectorAll(".step-0 section form div input.ready");
     if (readyInputs.length === document.querySelectorAll(".step-0 section form div input").length) {
         controlBtns[1].removeAttribute("disabled");
     } else {
-        controlBtns[1].setAttribute("disabled", "")
+        controlBtns[1].setAttribute("disabled", "");
     }
 }
 
@@ -81,7 +79,7 @@ controlBtns.forEach((btn) => {
 })
 
 function hidesteps () {
-    steps.forEach((step) => step.style.display = "none")
+    steps.forEach((step) => step.style.display = "none");
 }
 
 function showstep (step) {
