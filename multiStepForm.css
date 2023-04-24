@@ -397,7 +397,7 @@ button {
     border-color: var(--purplish-blue);
 }
 .step-2 .add-ons .box label::after {
-    font-family: var(--fa-style-family);
+    font-family: "Font Awesome 6 Free";
     content: "\f00c";
     font-weight: 900;
     width: 25px;
