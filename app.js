@@ -10,7 +10,9 @@ const summaryPlanPrice = document.querySelector(".step-3 .summary .plan .price")
 const summaryOns = document.querySelector(".step-3 .summary .ons");
 const total = document.querySelector(".step-3 .total");
 
-const user = {};
+const user = {
+    allOns: {},
+};
 
 const prices = {
     "month": {
@@ -134,15 +136,11 @@ function saveData (btn) {
         user.plan = plan.toLocaleLowerCase();
         user.planPrice = prices[planMode][user.plan];
     } else if (btn.classList.contains("ons-data")) {
-        let onsArr = [];
-        let onsPricesArr = [];
+        user.allOns = {};
         document.querySelectorAll(".step-2 .add-ons input[type='checkbox']:checked + .box label h4").forEach((ons) => {
             let onsTitle = ons.innerHTML;
-            onsArr.push(onsTitle);
-            onsPricesArr.push(prices[planMode][onsTitle.toLocaleLowerCase()]);
+            user.allOns[onsTitle] = prices[planMode][onsTitle.toLocaleLowerCase()];
         })
-        user.ons = onsArr;
-        user.onsPrice = onsPricesArr;
         showSummary();
     }
 }
@@ -151,11 +149,12 @@ function showSummary () {
     summaryPlan.innerHTML = `${user.plan} <span>(${planMode}ly)</span>`;
     summaryPlanPrice.innerHTML = user.planPrice;
     summaryOns.innerHTML = "";
-    for (let i = 0; i < user.ons.length; i++) {
-        let ons = `<p>${user.ons[i]}<span>${user.onsPrice[i]}</span></p>`;
+    let arr = [user.planPrice];
+    for (value in user.allOns) {
+        let ons = `<p>${value}<span>${user.allOns[value]}</span></p>`;
         summaryOns.innerHTML += ons;
+        arr.push(user.allOns[value]);
     }
-    let arr = user.onsPrice.concat(user.planPrice);
     let totalPrice = arr.map((x) => +(x.split("").map((x) => x.replace(/\D/g, "")).join("")));
     totalPrice = totalPrice.reduce((acc, current) => acc + current);
     total.innerHTML = `<p>Total <span class='mode'>(per ${planMode})</span> <span class='total-price'>+$${totalPrice}/${prices[planMode].abbreviation}</span></p>`;
