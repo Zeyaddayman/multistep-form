@@ -125,24 +125,24 @@ function showPrices (planMode) {
 }
 
 function saveData (btn) {
-    if (btn.id === "1") {
+    if (btn.classList.contains("info-data")) {
         user.name = document.querySelector(".step-0 form .name input").value;
         user.email = document.querySelector(".step-0 form .email input").value;
         user.phone = document.querySelector(".step-0 form .phone input").value;
-    } else if (btn.id === "2" ) {
+    } else if (btn.classList.contains("plan-data")) {
         let plan = document.querySelector(".step-1 .plan input[type='radio']:checked + .box .info h4").innerHTML;
         user.plan = plan.toLocaleLowerCase();
         user.planPrice = prices[planMode][user.plan];
-    } else if (btn.id === "3") {
-        let arr = [];
-        let priceArr = [];
-        document.querySelectorAll(".step-2 .add-ons input[type='checkbox']:checked").forEach((input) => {
-            let ons = input.nextElementSibling.firstElementChild.firstElementChild.innerHTML;
-            arr.push(ons);
-            priceArr.push(prices[planMode][ons.toLocaleLowerCase()]);
+    } else if (btn.classList.contains("ons-data")) {
+        let onsArr = [];
+        let onsPricesArr = [];
+        document.querySelectorAll(".step-2 .add-ons input[type='checkbox']:checked + .box label h4").forEach((ons) => {
+            let onsTitle = ons.innerHTML;
+            onsArr.push(onsTitle);
+            onsPricesArr.push(prices[planMode][onsTitle.toLocaleLowerCase()]);
         })
-        user.ons = arr;
-        user.onsPrice = priceArr;
+        user.ons = onsArr;
+        user.onsPrice = onsPricesArr;
         showSummary();
     }
 }
@@ -155,10 +155,11 @@ function showSummary () {
         let ons = `<p>${user.ons[i]}<span>${user.onsPrice[i]}</span></p>`;
         summaryOns.innerHTML += ons;
     }
-    let arr = user.onsPrice.concat(summaryPlanPrice.innerHTML);
+    let arr = user.onsPrice.concat(user.planPrice);
     let totalPrice = arr.map((x) => +(x.split("").map((x) => x.replace(/\D/g, "")).join("")));
     totalPrice = totalPrice.reduce((acc, current) => acc + current);
     total.innerHTML = `<p>Total <span class='mode'>(per ${planMode})</span> <span class='total-price'>+$${totalPrice}/${prices[planMode].abbreviation}</span></p>`;
+    user.total = totalPrice;        
 }
 
 function sendData () {
