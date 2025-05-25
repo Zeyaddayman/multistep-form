@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --marine-blue: hsl(213, 96%, 18%);
+  --purplish-blue: hsl(243, 100%, 62%);
+  --pastel-blue: hsl(228, 100%, 84%);
+  --light-blue: hsl(206, 94%, 87%);
+  --strawberry-red: hsl(354, 84%, 57%);
+}
+
+body {
+  background-color: rgb(235, 228, 228);
+}
+
+@theme inline {
+  --color-marine-blue: var(--marine-blue);
+  --color-purplish-blue: var(--purplish-blue);
+  --color-pastel-blue: var(--pastel-blue);
+  --color-light-blue: var(--light-blue);
+  --color-strawberry-red: var(--strawberry-red);
+}
+
+main {
+  background-color: white;
+  width: 95%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+section {
+  padding: 2rem 6rem;
+}
+
+@media screen and (max-width: 1024px) {
+  section {
+    padding: 2rem 3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    background-color: transparent;
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    position: initial;
+    top: initial;
+    left: initial;
+    transform: initial;
+  }
+  section {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1.5rem;
+    transform: translateY(-3rem);
+    background-color: white;
+    border-radius: 0.5rem;
+  }
+}
