@@ -9,8 +9,8 @@ const ContentSection = ({ title, description, children }: IProps) => {
         // section tag styled in global.css
         <section>
             <header className="text-2xl font-bold mb-4">{title}</header>
-            <p className="text-gray-400">{description}</p>
-            <div className="mt-8">
+            <p className="text-gray-500">{description}</p>
+            <div className="mt-8 flex-1 relative">
                 {children}
             </div>
         </section>

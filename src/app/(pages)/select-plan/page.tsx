@@ -1,4 +1,5 @@
 import ContentSection from "@/app/components/ContentSection"
+import Form from "./Form"
 
 const selectPlanPage = () => {
     return (
@@ -6,7 +7,7 @@ const selectPlanPage = () => {
             title="Select your plan"
             description="You have the option of monthly or yerly billing."
         >
-            selectPlanPage
+            <Form />
         </ContentSection>
     )
 }

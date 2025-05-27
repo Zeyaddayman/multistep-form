@@ -2,7 +2,6 @@ import Image from "next/image"
 import Links from "./Links"
 
 const Navbar = async () => {
-
     return (
         <nav className="relative w-full md:w-[274] h-[172px] md:h-[586] rounded-lg">
             <Image

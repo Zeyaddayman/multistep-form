@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const yourInfoSchema = z.object({
+export const userInfoSchema = z.object({
     name: z
         .string()
         .min(4, 'Name must be more than 4 characters')
@@ -12,5 +12,7 @@ export const yourInfoSchema = z.object({
     ,
     phone: z
         .string()
+        .min(10, 'Phone number must be at least 8 digits')
+        .max(15, 'Phone number must be at most 15 digits')
         .regex(/^\d+$/, 'Phone number must contain only digits')
 })

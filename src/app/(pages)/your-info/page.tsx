@@ -1,4 +1,5 @@
 import ContentSection from "@/app/components/ContentSection"
+import Form from "./Form"
 
 const yourInfoPage = () => {
     return (
@@ -6,7 +7,7 @@ const yourInfoPage = () => {
             title="Personal info"
             description="Please provide your name, email address, and phone number."
         >
-            yourInfoPage
+            <Form />
         </ContentSection>
     )
 }

@@ -1,0 +1,67 @@
+"use client"
+
+import { useActionState, useEffect } from "react"
+import { IUserInfoActionResponse, userInfoAction } from "./actions"
+import { useRouter } from "next/navigation"
+import { USER_INFO_FOMR_INPUTS } from "@/app/constants"
+import { useSelector } from "react-redux"
+import { selectFormDetails, setUserInfo } from "@/lib/features/formDetailsSlice"
+import { useAppDispatch } from "@/lib/hooks"
+import Input from "@/app/components/ui/Input"
+import Button from "@/app/components/ui/Button"
+
+const initialState: IUserInfoActionResponse = {
+    success: false,
+    errors: {},
+    data: {
+        name: "",
+        email: "",
+        phone: ""
+    }
+}
+
+const Form = () => {
+    const [state, formAction, pending] = useActionState(userInfoAction, initialState)
+    const { userInfo } = useSelector(selectFormDetails)
+    const router = useRouter()
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (state.success) {
+            dispatch(setUserInfo(state.data))
+            router.push("/select-plan")
+        }
+    }, [state, router, dispatch])
+
+    return (
+        <form action={formAction} className="flex flex-col gap-4 mt-3">
+            {USER_INFO_FOMR_INPUTS.map((input) => {
+                const defaultValue = state.data[input.name as keyof typeof userInfo] || userInfo[input.name as keyof typeof userInfo]
+                return (
+                    <div key={input.name} className="flex flex-col">
+                        <label htmlFor={input.name} className="font-medium text-marine-blue mb-1">
+                            {input.label}
+                        </label>
+                        <Input
+                            type={input.type}
+                            id={input.name}
+                            name={input.name}
+                            disabled={pending}
+                            defaultValue={defaultValue}
+                        />
+                        {state.errors[input.name] && (
+                            <span className="text-sm text-red-500">{state.errors[input.name]}</span>
+                        )}
+                    </div>
+                )
+            })}
+            <div className="control-buttons">
+                <Button type="submit" isLoading={pending} className="text-white w-fit bg-marine-blue ml-auto">
+                    {pending ? "Submitting..." : "Next Step"}
+                </Button>
+            </div>
+        </form>
+    )
+}
+
+export default Form
