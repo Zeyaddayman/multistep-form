@@ -1,5 +1,5 @@
 import ContentSection from "@/app/components/ContentSection"
-import Form from "./Form"
+import Form from "./components/Form"
 
 const yourInfoPage = () => {
     return (

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 import { IFormDetails, ISelectedPlan, TUserInfo } from '@/app/interfaces';
+import { PLAN_TYPES } from '@/app/constants';
 
 const initialState: IFormDetails = {
     userInfo: {
@@ -9,6 +10,7 @@ const initialState: IFormDetails = {
         phone: ''
     },
     planType: "monthly",
+    selectedPlan: PLAN_TYPES[0],
     addOns: []
 }
 
@@ -21,11 +23,14 @@ export const formDetailsSlice = createSlice({
         },
         setSelectedPlan: (state, action: PayloadAction<ISelectedPlan>) => {
             state.selectedPlan = action.payload;
+        },
+        setPlanType: (state, action: PayloadAction<IFormDetails["planType"]>) => {
+            state.planType = action.payload;
         }
     }
 })
 
-export const { setUserInfo, setSelectedPlan } = formDetailsSlice.actions
+export const { setUserInfo, setSelectedPlan, setPlanType } = formDetailsSlice.actions
 
 export const selectFormDetails = (state: RootState) => state.formDetails;
 

@@ -26,8 +26,8 @@ export interface ISelectedPlan {
 
 export interface IFormDetails {
     userInfo: TUserInfo,
-    planType?: 'monthly' | 'yearly',
-    selectedPlan?: ISelectedPlan,
+    planType: 'monthly' | 'yearly',
+    selectedPlan: ISelectedPlan,
     addOns: {
         name: string;
         price: number;

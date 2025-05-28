@@ -1,9 +1,13 @@
 import { InputHTMLAttributes } from "react";
 
-const Input = ({ ...attributes }: InputHTMLAttributes<HTMLInputElement>) => {
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
+    isError?: boolean;
+}
+
+const Input = ({ isError, ...attributes }: IProps) => {
     return (
         <input
-            className="border-[1px] border-gray-300 focus:border-marine-blue focus:outline-none focus:ring-1 focus:ring-marine-blue rounded px-3 py-3 text-md w-full bg-transparent"
+            className={`border-[1px] ${isError ? "border-red-500" : "border-gray-300"} focus:border-marine-blue focus:outline-none focus:ring-1 focus:ring-marine-blue rounded px-3 py-3 text-md w-full bg-transparen`}
             {...attributes}
         />
     );

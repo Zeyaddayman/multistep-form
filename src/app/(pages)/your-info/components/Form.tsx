@@ -1,7 +1,6 @@
 "use client"
 
 import { useActionState, useEffect } from "react"
-import { IUserInfoActionResponse, userInfoAction } from "./actions"
 import { useRouter } from "next/navigation"
 import { USER_INFO_FOMR_INPUTS } from "@/app/constants"
 import { useSelector } from "react-redux"
@@ -9,6 +8,7 @@ import { selectFormDetails, setUserInfo } from "@/lib/features/formDetailsSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import Input from "@/app/components/ui/Input"
 import Button from "@/app/components/ui/Button"
+import { IUserInfoActionResponse, userInfoAction } from "../actions"
 
 const initialState: IUserInfoActionResponse = {
     success: false,
@@ -48,6 +48,7 @@ const Form = () => {
                             name={input.name}
                             disabled={pending}
                             defaultValue={defaultValue}
+                            isError={Boolean(state.errors[input.name])}
                         />
                         {state.errors[input.name] && (
                             <span className="text-sm text-red-500">{state.errors[input.name]}</span>
@@ -56,7 +57,7 @@ const Form = () => {
                 )
             })}
             <div className="control-buttons">
-                <Button type="submit" isLoading={pending} className="text-white w-fit bg-marine-blue ml-auto">
+                <Button type="submit" isLoading={pending} className="w-fit bg-marine-blue ml-auto">
                     {pending ? "Submitting..." : "Next Step"}
                 </Button>
             </div>
