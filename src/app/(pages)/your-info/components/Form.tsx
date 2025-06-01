@@ -34,7 +34,7 @@ const Form = () => {
     }, [state, router, dispatch])
 
     return (
-        <form action={formAction} className="flex flex-col gap-4 mt-3">
+        <form action={formAction} className="flex flex-col gap-5 mt-3 flex-1">
             {USER_INFO_FOMR_INPUTS.map((input) => {
                 const defaultValue = state.data[input.name as keyof typeof userInfo] || userInfo[input.name as keyof typeof userInfo]
                 return (

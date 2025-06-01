@@ -27,7 +27,7 @@ export default function RootLayout({
         <StoreProvider>
           {/* main tag styled in global css file */}
           <main>
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col lg:flex-row">
               <Navbar />
               {children}
             </div>

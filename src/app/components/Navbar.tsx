@@ -3,18 +3,20 @@ import Links from "./Links"
 
 const Navbar = async () => {
     return (
-        <nav className="relative w-full md:w-[274] h-[172px] md:h-[586] rounded-lg">
+        <nav className="relative w-full lg:w-[274] h-[172px] lg:h-[586] rounded-lg">
             <Image
                 src={"/images/bg-sidebar-desktop.svg"}
-                className="hidden md:block object-cover"
+                className="hidden lg:block"
                 alt="sidebar background"
                 fill
+                priority
             />
             <Image
                 src={"/images/bg-sidebar-mobile.svg"}
-                className="md:hidden object-cover"
+                className="lg:hidden object-cover"
                 alt="sidebar background"
                 fill
+                priority
             />
             <Links />
         </nav>

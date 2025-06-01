@@ -28,8 +28,14 @@ export interface IFormDetails {
     userInfo: TUserInfo,
     planType: 'monthly' | 'yearly',
     selectedPlan: ISelectedPlan,
-    addOns: {
-        name: string;
-        price: number;
-    }[]
+    addOns: IAddOn[]
+}
+
+export interface IAddOn {
+    name: string;
+    description: string;
+    price: {
+        monthly: number;
+        yearly: number;
+    }
 }

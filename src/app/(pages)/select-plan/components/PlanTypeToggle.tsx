@@ -15,7 +15,7 @@ const PlanTypeToggle = () => {
     }
 
     return (
-        <div className="flex items-center justify-center mt-5 bg-[#bfe2fd1a] rounded p-4 gap-5">
+        <div className="flex items-center justify-center mt-5 bg-[#bfe2fd1a] rounded p-4 gap-5 mb-5">
             <Input
                 className="appearance-none absolute"
                 type="checkbox"

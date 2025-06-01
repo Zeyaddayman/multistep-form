@@ -16,7 +16,7 @@ const Links = () => {
     }
 
     return (
-        <ul className="flex flex-row md:flex-col gap-6 mt-5 uppercase p-4 relative z-10 justify-center md:justify-start">
+        <ul className="flex flex-row lg:flex-col gap-6 mt-5 uppercase p-4 relative z-10 justify-center lg:justify-start">
             {LINKS.map((link) => (
                 <li onClick={() => handleChange(link)} key={link.name} className="flex gap-4 items-center cursor-pointer">
                     <span className={`w-10 h-10 rounded-full flex items-center justify-center font-bold border border-white
@@ -24,7 +24,7 @@ const Links = () => {
 
                         {link.order}
                     </span>
-                    <p className="hidden md:block">
+                    <p className="hidden lg:block">
                         <span className="text-pastel-blue text-sm">
                             {`step ${link.order}`}
                         </span>

@@ -13,7 +13,7 @@ const PlanBox = ({ plan }: { plan: ISelectedPlan }) => {
     const dispatch = useAppDispatch()
 
     return (
-        <div key={plan.name}>
+        <div>
             <Input
                 className="appearance-none absolute"
                 type="radio"

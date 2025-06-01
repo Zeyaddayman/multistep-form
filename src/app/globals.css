@@ -39,19 +39,13 @@ section {
 }
 
 .control-buttons {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
 }
 
 @media screen and (max-width: 1024px) {
-  section {
-    padding: 2rem 3rem;
-  }
-}
-
-@media screen and (max-width: 768px) {
   main {
     background-color: transparent;
     width: 100%;

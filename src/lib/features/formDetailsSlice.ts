@@ -26,11 +26,20 @@ export const formDetailsSlice = createSlice({
         },
         setPlanType: (state, action: PayloadAction<IFormDetails["planType"]>) => {
             state.planType = action.payload;
+        },
+        setAddOns: (state, action: PayloadAction<IFormDetails["addOns"]>) => {
+            state.addOns = action.payload;
         }
     }
 })
 
-export const { setUserInfo, setSelectedPlan, setPlanType } = formDetailsSlice.actions
+export const {
+    setUserInfo,
+    setSelectedPlan,
+    setPlanType,
+    setAddOns
+    
+} = formDetailsSlice.actions
 
 export const selectFormDetails = (state: RootState) => state.formDetails;
 
