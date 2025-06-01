@@ -5,7 +5,7 @@ import PlanTypeToggle from "./components/PlanTypeToggle"
 import Link from "next/link"
 import { baseButtonStyle } from "@/app/components/ui/Button"
 
-const selectPlanPage = () => {
+const SelectPlanPage = () => {
     return (
         <ContentSection
             title="Select your plan"
@@ -35,4 +35,4 @@ const selectPlanPage = () => {
     )
 }
 
-export default selectPlanPage
+export default SelectPlanPage

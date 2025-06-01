@@ -4,7 +4,7 @@ import AddOnBox from "./components/AddOnBox"
 import Link from "next/link"
 import { baseButtonStyle } from "@/app/components/ui/Button"
 
-const addOnsPage = () => {
+const AddOnsPage = () => {
     return (
         <ContentSection
             title="Pick add-ons"
@@ -33,4 +33,4 @@ const addOnsPage = () => {
     )
 }
 
-export default addOnsPage
+export default AddOnsPage

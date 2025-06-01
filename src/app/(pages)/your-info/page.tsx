@@ -1,7 +1,7 @@
 import ContentSection from "@/app/components/ContentSection"
 import Form from "./components/Form"
 
-const yourInfoPage = () => {
+const YourInfoPage = () => {
     return (
         <ContentSection
             title="Personal info"
@@ -12,4 +12,4 @@ const yourInfoPage = () => {
     )
 }
 
-export default yourInfoPage
+export default YourInfoPage
