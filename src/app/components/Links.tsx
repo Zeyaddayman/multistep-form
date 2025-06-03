@@ -1,24 +1,17 @@
 "use client"
 
+import Link from 'next/link'
 import { LINKS } from '../constants'
-import { usePathname, useRouter } from 'next/navigation'
-import { ILink } from '../interfaces'
+import { usePathname } from 'next/navigation'
 
 const Links = () => {
 
     const pathname = usePathname()
-    const router = useRouter()
-
-    const handleChange = (link: ILink) => {
-        if (pathname === link.pathname) return
-
-        router.push(link.pathname)
-    }
 
     return (
         <ul className="flex flex-row lg:flex-col gap-6 mt-5 uppercase p-4 relative z-10 justify-center lg:justify-start">
             {LINKS.map((link) => (
-                <li onClick={() => handleChange(link)} key={link.name} className="flex gap-4 items-center cursor-pointer">
+                <Link href={link.pathname} key={link.name} className="flex gap-4 items-center cursor-pointer">
                     <span className={`w-10 h-10 rounded-full flex items-center justify-center font-bold border border-white
                         ${link.pathname === pathname ? "bg-light-blue text-marine-blue" : "text-white"}`} >
 
@@ -33,7 +26,7 @@ const Links = () => {
                             {link.name}
                         </span>
                     </p>
-                </li>
+                </Link>
             ))}
         </ul>
     )
