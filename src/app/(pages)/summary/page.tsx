@@ -2,10 +2,10 @@
 
 import ContentSection from "@/app/components/ContentSection"
 import Button from "@/app/components/ui/Button"
-import { startTransition, useActionState } from "react"
+import { startTransition, useActionState, useEffect } from "react"
 import { confirmAction, IConfirmActionResponse } from "./actions"
-import { useAppSelector } from "@/lib/hooks"
-import { selectFormDetails } from "@/lib/features/formDetailsSlice"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { resetFormDetails, selectFormDetails } from "@/lib/features/formDetailsSlice"
 import ThankYou from "./components/ThankYou"
 import Link from "next/link"
 
@@ -17,6 +17,13 @@ const SummaryPage = () => {
 
     const [state, confirmActionHandler, pending] = useActionState(confirmAction, initialState)
     const formDetails = useAppSelector(selectFormDetails)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (state.success) {
+            dispatch(resetFormDetails())
+        }
+    }, [dispatch, state.success])
 
     const handleSubmit = () => {
         startTransition(() => {

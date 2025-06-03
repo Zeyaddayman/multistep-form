@@ -29,6 +29,9 @@ export const formDetailsSlice = createSlice({
         },
         setAddOns: (state, action: PayloadAction<IFormDetails["addOns"]>) => {
             state.addOns = action.payload;
+        },
+        resetFormDetails: () => {
+            return {...initialState}
         }
     }
 })
@@ -37,7 +40,8 @@ export const {
     setUserInfo,
     setSelectedPlan,
     setPlanType,
-    setAddOns
+    setAddOns,
+    resetFormDetails
     
 } = formDetailsSlice.actions
 
