@@ -18,7 +18,14 @@ export const confirmAction = async (
     const validatedData = userInfoSchema.safeParse(userInfo)
 
     if (!validatedData.success) {
-        redirect("/your-info");
+        const searchParams = new URLSearchParams()
+
+        const issues = validatedData.error.issues
+
+        for (let i = 0; i < issues.length; i++) {
+            searchParams.set(String(issues[i].path[0]), issues[i].message)
+        }
+        redirect(`/your-info?${searchParams}`);
     }
 
     return {
