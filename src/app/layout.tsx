@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: "https://multistep-form-tau.vercel.app",
     siteName: "Multistep Form",
     images: {
-      url: "https://multistep-form-tau.vercel.app/images/multistep-form-preview.png",
+      url: "https://multistep-form-tau.vercel.app/images/multistep-form-preview.jpg",
       width: 1200,
       height: 627
     }
