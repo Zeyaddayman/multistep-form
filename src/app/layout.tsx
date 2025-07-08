@@ -11,8 +11,17 @@ const ubuntu = Ubuntu({
 
 export const metadata: Metadata = {
   title: "Multistep Form",
-  description: "A multistep form built with Next.js and React useAction Hook and server actions.",
-};
+  openGraph: {
+    title: "Multistep Form",
+    url: "https://multistep-form-tau.vercel.app",
+    siteName: "Multistep Form",
+    images: {
+      url: "https://multistep-form-tau.vercel.app/images/multistep-form-preview.png",
+      width: 1200,
+      height: 627
+    }
+  }
+}
 
 export default function RootLayout({
   children,
