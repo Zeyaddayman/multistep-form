@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
-import { USER_INFO_FOMR_INPUTS } from "@/app/constants"
+import { USER_INFO_FORM_INPUTS } from "@/app/constants"
 import { useSelector } from "react-redux"
 import { selectFormDetails, setUserInfo } from "@/lib/features/formDetailsSlice"
 import { useAppDispatch } from "@/lib/hooks"
@@ -47,7 +47,7 @@ const Form = ({ initialErrors }: IProps) => {
 
     return (
         <form action={formAction} className="flex flex-col gap-5 mt-3 flex-1">
-            {USER_INFO_FOMR_INPUTS.map((input) => {
+            {USER_INFO_FORM_INPUTS.map((input) => {
 
                 const defaultValue = state.data[input.name as keyof typeof userInfo] || userInfo[input.name as keyof typeof userInfo]
 

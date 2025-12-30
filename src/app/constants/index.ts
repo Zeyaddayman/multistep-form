@@ -23,7 +23,7 @@ export const LINKS: ILink[] = [
     }
 ]
 
-export const USER_INFO_FOMR_INPUTS: { 
+export const USER_INFO_FORM_INPUTS: { 
     name: string;
     type: string;
     label: string;
