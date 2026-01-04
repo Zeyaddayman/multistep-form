@@ -1,36 +1,62 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { IFormDetails, ISelectedPlan, TUserInfo } from '@/app/interfaces';
-import { PLAN_TYPES } from '@/app/constants';
+import { DEFAULT_PLAN, DEFAULT_PLAN_TYPE } from '@/constants';
+import { FormDetails } from '@/interfaces';
 
-const initialState: IFormDetails = {
+const initialState: FormDetails = {
     userInfo: {
         name: '',
         email: '',
         phone: ''
     },
-    planType: "monthly",
-    selectedPlan: PLAN_TYPES[0],
+    planType: DEFAULT_PLAN_TYPE,
+    selectedPlan: DEFAULT_PLAN,
     addOns: []
+}
+
+let timeout: NodeJS.Timeout
+
+const backgroundSaveToLocalStorage = (formDetails: FormDetails) => {
+
+    clearTimeout(timeout)
+
+    timeout = setTimeout(() => {
+        localStorage.setItem("form-details", JSON.stringify(formDetails))
+    }, 500)
 }
 
 export const formDetailsSlice = createSlice({
     name: 'formDetails',
     initialState,
     reducers: {
-        setUserInfo: (state, action: PayloadAction<TUserInfo>) => {
-            state.userInfo = action.payload;
+        setUserInfo: (state, action: PayloadAction<FormDetails["userInfo"]>) => {
+            state.userInfo = action.payload
+
+            // to prevent input delay because of the multiple disk writes
+            const plainObjectFormDetails = JSON.parse(JSON.stringify(state))
+            backgroundSaveToLocalStorage(plainObjectFormDetails)
         },
-        setSelectedPlan: (state, action: PayloadAction<ISelectedPlan>) => {
-            state.selectedPlan = action.payload;
+        setSelectedPlan: (state, action: PayloadAction<FormDetails["selectedPlan"]>) => {
+            state.selectedPlan = action.payload
+            localStorage.setItem("form-details", JSON.stringify(state))
         },
-        setPlanType: (state, action: PayloadAction<IFormDetails["planType"]>) => {
-            state.planType = action.payload;
+        setPlanType: (state, action: PayloadAction<FormDetails["planType"]>) => {
+            state.planType = action.payload
+            localStorage.setItem("form-details", JSON.stringify(state))
         },
-        setAddOns: (state, action: PayloadAction<IFormDetails["addOns"]>) => {
-            state.addOns = action.payload;
+        setAddOns: (state, action: PayloadAction<FormDetails["addOns"]>) => {
+            state.addOns = action.payload
+            localStorage.setItem("form-details", JSON.stringify(state))
+        },
+        setSavedFormDetails: () => {
+            const savedFormDetails = localStorage.getItem("form-details")
+
+            if (savedFormDetails) {
+                return JSON.parse(savedFormDetails)
+            }
         },
         resetFormDetails: () => {
+            localStorage.removeItem("form-details")
             return {...initialState}
         }
     }
@@ -41,8 +67,9 @@ export const {
     setSelectedPlan,
     setPlanType,
     setAddOns,
+    setSavedFormDetails,
     resetFormDetails
-    
+
 } = formDetailsSlice.actions
 
 export const selectFormDetails = (state: RootState) => state.formDetails;

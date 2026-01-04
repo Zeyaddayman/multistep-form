@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import StoreProvider from "./providers/StoreProvider";
+import Navbar from "../components/Navbar";
+import StoreProvider from "../providers/StoreProvider";
 
 const ubuntu = Ubuntu({
   weight: ["300", "400", "500", "700"],
@@ -10,11 +10,14 @@ const ubuntu = Ubuntu({
 });
 
 export const metadata: Metadata = {
-  title: "Multistep Form",
+  title: {
+    template: '%s | Multi-Step Form',
+    default: 'Multi-Step Form', 
+  },
   openGraph: {
-    title: "Multistep Form",
+    title: "Multi-Step Form",
     url: "https://multistep-form-tau.vercel.app",
-    siteName: "Multistep Form",
+    siteName: "Multi-Step Form",
     images: {
       url: "https://multistep-form-tau.vercel.app/images/multistep-form-preview.jpg",
       width: 1200,
