@@ -10,12 +10,12 @@ const saveToLocalStorage = (state: Form) => {
 
 let timeout: NodeJS.Timeout
 
-const backgroundSaveToLocalStorage = (formDetails: Form) => {
+const backgroundSaveToLocalStorage = (state: Form) => {
 
     clearTimeout(timeout)
 
     timeout = setTimeout(() => {
-        localStorage.setItem(LOCAL_STORAGE_FORM_KEY, JSON.stringify(formDetails))
+        localStorage.setItem(LOCAL_STORAGE_FORM_KEY, JSON.stringify(state))
     }, 500)
 }
 
