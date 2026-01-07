@@ -1,4 +1,4 @@
-import { AddOn, NavLink, Plan, PlanType, UserInfoFieldsNames } from "@/interfaces";
+import { NavLink, PlanType, UserInfoFieldsNames } from "@/interfaces";
 import { InputHTMLAttributes } from "react";
 
 export const LINKS: NavLink[] = [
@@ -50,7 +50,7 @@ export const USER_INFO_FORM_FIELDS: {
     }
 ]
 
-export const PLANS: Plan[] = [
+export const PLANS = [
     {
         name: "Arcade",
         icon: "/images/icon-arcade.svg",
@@ -78,11 +78,11 @@ export const PLANS: Plan[] = [
         },
         yearlyOffer: "2 months free"
     }
-]
+] as const
 
 export const PLAN_TYPES: PlanType[] = ["monthly", "yearly"]
 
-export const ADD_ONS: AddOn[] = [
+export const ADD_ONS = [
     {
         name: "Online service",
         description: "Access to multiplayer games",
@@ -107,7 +107,7 @@ export const ADD_ONS: AddOn[] = [
             yearly: 20
         }
     }
-]
+] as const
 
 export const DEFAULT_PLAN_TYPE: PlanType = PLAN_TYPES[0]
 

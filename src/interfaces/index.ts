@@ -1,3 +1,5 @@
+import { ADD_ONS, PLANS } from "@/constants"
+
 export interface NavLink {
     name: string
     pathname: string
@@ -16,30 +18,19 @@ export interface UserInfo {
 
 export type UserInfoFieldsNames = keyof UserInfo
 
-export interface Plan {
-    name: string
-    icon: string
-    price: {
-        monthly: number
-        yearly: number
-    }
-    yearlyOffer: string
-}
-
 export type PlanType = 'monthly' | 'yearly'
 
-export interface AddOn {
-    name: string
-    description: string
-    price: {
-        monthly: number
-        yearly: number
-    }
-}
+export type Plan = typeof PLANS[number]
 
-export interface FormDetails {
+export type AddOn = typeof ADD_ONS[number]
+
+export type PlanName = Plan["name"]
+
+export type AddOnName = AddOn["name"]
+
+export interface Form {
     userInfo: UserInfo
-    selectedPlan: Plan
     planType: PlanType
-    addOns: AddOn[]
+    plan: PlanName
+    addOns: AddOnName[]
 }

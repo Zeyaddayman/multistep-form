@@ -1,14 +1,14 @@
 "use client"
 
 import Input from "@/components/ui/Input"
-import { AddOn, PlanType } from "@/interfaces"
+import { AddOn, AddOnName, PlanType } from "@/interfaces"
 import { Check } from "lucide-react"
 
 interface Props {
     addOn: AddOn
     isChecked: boolean
     planType: PlanType
-    toggleAddOn: (addOn: AddOn) => void
+    toggleAddOn: (addOnName: AddOnName) => void
 }
 
 const AddOnBox = ({ addOn, isChecked, planType, toggleAddOn }: Props) => {
@@ -21,7 +21,7 @@ const AddOnBox = ({ addOn, isChecked, planType, toggleAddOn }: Props) => {
                 className="sr-only peer"
                 checked={isChecked}
                 value={addOn.name}
-                onChange={() => toggleAddOn(addOn)}
+                onChange={() => toggleAddOn(addOn.name)}
             />
             <label
                 htmlFor={addOn.name}

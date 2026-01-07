@@ -2,23 +2,15 @@
 
 import { PLANS } from "@/constants"
 import PlanBox from "./PlanBox"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { selectFormDetails, setSavedFormDetails, setSelectedPlan } from "@/lib/features/formDetailsSlice"
-import { Plan } from "@/interfaces"
-import { useEffect } from "react"
+import { useFormContext } from "@/contexts/FormContext"
+import { PlanName } from "@/interfaces"
 
 const PlansList = () => {
 
-    const { selectedPlan, planType } = useAppSelector(selectFormDetails)
-    const dispatch = useAppDispatch()
+    const { form: { plan: selectedPlan, planType }, setPlan } = useFormContext()
 
-    // Get saved form details on mount
-    useEffect(() => {
-        dispatch(setSavedFormDetails())
-    }, [dispatch])
-
-    const setPlan = (plan: Plan) => {
-        dispatch(setSelectedPlan(plan))
+    const setPlanName = (planName: PlanName) => {
+        setPlan(planName)
     }
 
     return (
@@ -27,9 +19,9 @@ const PlansList = () => {
                 <PlanBox
                     key={plan.name}
                     plan={plan}
-                    isChecked={selectedPlan?.name === plan.name}
+                    isChecked={plan.name === selectedPlan}
                     planType={planType}
-                    setPlan={setPlan}
+                    setPlanName={setPlanName}
                 />
             ))}
         </div>

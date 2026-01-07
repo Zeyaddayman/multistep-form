@@ -1,16 +1,14 @@
 "use client"
 
 import Input from "@/components/ui/Input"
-import { selectFormDetails, setPlanType } from "@/lib/features/formDetailsSlice"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { useFormContext } from "@/contexts/FormContext"
 
 const PlanTypeToggle = () => {
 
-    const { planType } = useAppSelector(selectFormDetails)
-    const dispatch = useAppDispatch()
+    const { form: { planType }, setPlanType } = useFormContext()
 
     const togglePlanType = () => {
-        dispatch(setPlanType(planType === 'monthly' ? 'yearly' : 'monthly'))
+        setPlanType(planType === 'monthly' ? 'yearly' : 'monthly')
     }
 
     return (

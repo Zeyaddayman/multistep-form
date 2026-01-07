@@ -3,34 +3,29 @@
 import { useEffect, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { USER_INFO_FORM_FIELDS } from "@/constants"
-import { selectFormDetails, setSavedFormDetails, setUserInfo } from "@/lib/features/formDetailsSlice"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import Input from "@/components/ui/Input"
 import { FormErrors, UserInfoFieldsNames } from "@/interfaces"
 import { userInfoSchema } from "@/validations"
+import { useFormContext } from "@/contexts/FormContext"
+
+const initialErrors = USER_INFO_FORM_FIELDS.reduce<Record<UserInfoFieldsNames, "">>((acc, field) => {
+    acc[field.name] = ""
+    return acc
+}, {} as Record<UserInfoFieldsNames, "">)
 
 const UserInfoForm = () => {
 
-    const { userInfo } = useAppSelector(selectFormDetails)
+    const { form: { userInfo }, setUserInfo } = useFormContext()
 
-    const [errors, setErrors] = useState<FormErrors>({
-        name: "",
-        email: "",
-        phone: ""
-    })
+    const [errors, setErrors] = useState<FormErrors>(initialErrors)
     const [bluredInputs, setbluredInputs] = useState<string[]>([])
 
     const router = useRouter()
-    const dispatch = useAppDispatch()
     const pathname = usePathname()
 
-    // Get saved form details on mount
-    useEffect(() => {
-        dispatch(setSavedFormDetails())
-    }, [dispatch])
-
     useEffect(() => {
 
+        // Get the errors messages if got redirected from the summary step
         const searchParams = new URLSearchParams(window.location.search)
 
         const searchParamsErrors: FormErrors = {}
@@ -54,7 +49,7 @@ const UserInfoForm = () => {
 
         const newUserInfo = {...userInfo, [fieldName]: value }
 
-        dispatch(setUserInfo(newUserInfo))
+        setUserInfo(newUserInfo)
 
         const result = userInfoSchema.shape[fieldName].safeParse(value)
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
-import StoreProvider from "../providers/StoreProvider";
+import { FormContextProvider } from "@/contexts/FormContext";
 
 const ubuntu = Ubuntu({
   weight: ["300", "400", "500", "700"],
@@ -36,15 +36,15 @@ export default function RootLayout({
       <body
         className={`${ubuntu.className} antialiased`}
       >
-        <StoreProvider>
-          {/* main tag styled in global css file */}
-          <main>
-            <div className="flex flex-col lg:flex-row">
-              <Navbar />
+        {/* main tag styled in global css file */}
+        <main>
+          <div className="flex flex-col lg:flex-row">
+            <Navbar />
+            <FormContextProvider>
               {children}
-            </div>
-          </main>
-        </StoreProvider>
+            </FormContextProvider>
+          </div>
+        </main>
       </body>
     </html>
   );

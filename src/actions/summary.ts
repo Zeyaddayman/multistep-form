@@ -1,23 +1,20 @@
 "use server"
 
-import { FormDetails } from "@/interfaces";
+import { Form } from "@/interfaces";
 import { formatErrors } from "@/utils";
-import { userInfoSchema } from "@/validations";
+import { finalSchema } from "@/validations";
 import { redirect } from "next/navigation";
-
 export interface ConfirmActionState {
     success: boolean
 }
 
 export const confirmAction = async (
-    prevState: ConfirmActionState,
-    formDetails: FormDetails
+    _prevState: ConfirmActionState,
+    form: Form
 
 ): Promise<ConfirmActionState> => {
 
-    const { userInfo } = formDetails
-
-    const result = userInfoSchema.safeParse(userInfo)
+    const result = finalSchema.safeParse(form)
 
     if (!result.success) {
         const searchParams = new URLSearchParams()

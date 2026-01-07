@@ -1,17 +1,17 @@
 "use client"
 
 import Input from "@/components/ui/Input"
-import { Plan, PlanType } from "@/interfaces";
+import { Plan, PlanName, PlanType } from "@/interfaces";
 import Image from "next/image";
 
 interface Props {
     plan: Plan
     isChecked: boolean
     planType: PlanType
-    setPlan: (plan: Plan) => void
+    setPlanName: (planName: PlanName) => void
 }
 
-const PlanBox = ({ plan, isChecked, planType, setPlan }: Props) => {
+const PlanBox = ({ plan, isChecked, planType, setPlanName }: Props) => {
     return (
         <div>
             <Input
@@ -21,7 +21,7 @@ const PlanBox = ({ plan, isChecked, planType, setPlan }: Props) => {
                 id={plan.name}
                 checked={isChecked}
                 value={plan.name}
-                onChange={() => setPlan(plan)}
+                onChange={() => setPlanName(plan.name)}
             />
             <label
                 htmlFor={plan.name}

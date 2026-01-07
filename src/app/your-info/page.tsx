@@ -18,7 +18,7 @@ const YourInfoPage = async () => {
             <UserInfoForm />
             <div className="control-buttons">
                 <Link
-                    href="/summary"
+                    href="/select-plan"
                     className={`${baseButtonStyle} bg-marine-blue ml-auto`}
                 >
                     Next Step

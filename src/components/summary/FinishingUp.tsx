@@ -4,10 +4,10 @@ import { startTransition, useActionState, useEffect } from "react"
 import ContentSection from "../ui/ContentSection"
 import ThankYou from "./ThankYou"
 import { confirmAction, ConfirmActionState } from "@/actions/summary"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { resetFormDetails, selectFormDetails, setSavedFormDetails } from "@/lib/features/formDetailsSlice"
 import Button from "../ui/Button"
 import Link from "next/link"
+import { useFormContext } from "@/contexts/FormContext"
+import { ADD_ONS, PLANS } from "@/constants"
 
 const initialState: ConfirmActionState = {
     success: false
@@ -16,31 +16,35 @@ const initialState: ConfirmActionState = {
 const FinishingUp = () => {
 
     const [state, action, pending] = useActionState(confirmAction, initialState)
-    const formDetails = useAppSelector(selectFormDetails)
-    const dispatch = useAppDispatch()
 
-    // Get saved form details on mount
-    useEffect(() => {
-        dispatch(setSavedFormDetails())
-    }, [dispatch])
+    const { form, clearForm } = useFormContext()
 
     useEffect(() => {
-        if (state.success) {
-            dispatch(resetFormDetails())
-        }
-    }, [dispatch, state.success])
+
+        if (state.success) clearForm()
+
+    }, [state.success])
+
 
     if (state.success) return <ThankYou />
 
     const handleSubmit = () => {
-        startTransition(() => action(formDetails))
+        startTransition(() => action(form))
     }
 
+    const planType = form.planType
+
+    const selectedPlan = PLANS.find(plan => plan.name === form.plan)!
+
+    const selectedAddOns = ADD_ONS.filter(addOn => form.addOns.includes(addOn.name))
+
     const calculateTotal = () => {
-        const planPrice = formDetails.selectedPlan.price[formDetails.planType];
-        const addOnsTotal = formDetails.addOns.reduce((total, addOn) => total + addOn.price[formDetails.planType], 0);
+        const planPrice = selectedPlan.price[planType];
+        const addOnsTotal = selectedAddOns.reduce((total, addOn) => total + addOn.price[planType], 0);
         return planPrice + addOnsTotal;
     }
+
+    const formattedPlanType = planType.charAt(0).toUpperCase() + planType.slice(1)
 
     return (
         <ContentSection
@@ -51,7 +55,7 @@ const FinishingUp = () => {
                 <div className="flex items-center justify-between pb-5 border-b-1 border-light-blue">
                     <div>
                         <h4 className="text-xl font-semibold text-marine-blue">
-                            {`${formDetails.selectedPlan.name} (${formDetails.planType.charAt(0).toUpperCase() + formDetails.planType.slice(1)})`}
+                            {`${selectedPlan.name} (${formattedPlanType})`}
                         </h4>
                         <Link
                             href={`/select-plan`}
@@ -61,15 +65,15 @@ const FinishingUp = () => {
                         </Link>
                     </div>
                     <span className="text-marine-blue text-xl font-semibold">
-                        ${formDetails.selectedPlan.price[formDetails.planType]}/{formDetails.planType === "monthly" ? "mo" : "yr"}
+                        ${selectedPlan.price[planType]}/{planType === "monthly" ? "mo" : "yr"}
                     </span>
                 </div>
                 <div className="flex flex-col gap-4 mt-4">
-                    {formDetails.addOns.map((addOn) => (
+                    {selectedAddOns.map((addOn) => (
                         <div key={addOn.name} className="flex justify-between">
                             <p className="font-semibold text-gray-500">{addOn.name}</p>
                             <span>
-                                +${addOn.price[formDetails.planType]}/{formDetails.planType === "monthly" ? "mo" : "yr"}
+                                +${addOn.price[planType]}/{planType === "monthly" ? "mo" : "yr"}
                             </span>
                         </div>
                     ))}
@@ -77,9 +81,9 @@ const FinishingUp = () => {
             </div>
             <div className="px-6 mb-5">
                 <div className="flex justify-between items-center text-xl font-semibold text-gray-500">
-                    <span>Total (per {formDetails.planType === "monthly" ? "month" : "year"})</span>
+                    <span>Total (per {planType === "monthly" ? "month" : "year"})</span>
                     <span className="text-purplish-blue">
-                        ${calculateTotal()}/{formDetails.planType === "monthly" ? "mo" : "yr"}
+                        ${calculateTotal()}/{planType === "monthly" ? "mo" : "yr"}
                     </span>
                 </div>
             </div>
@@ -96,7 +100,7 @@ const FinishingUp = () => {
                     onClick={handleSubmit}
                     disabled={pending}
                 >
-                    {pending ? "Submitting..." : "Confirm"}
+                    {pending ? "Confirming..." : "Confirm"}
                 </Button>
             </div>
         </ContentSection>

@@ -2,35 +2,27 @@
 
 import { ADD_ONS } from "@/constants"
 import AddOnBox from "./AddOnBox"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { selectFormDetails, setAddOns, setSavedFormDetails } from "@/lib/features/formDetailsSlice"
-import { AddOn } from "@/interfaces"
-import { useEffect } from "react"
+import { AddOnName } from "@/interfaces"
+import { useFormContext } from "@/contexts/FormContext"
 
 const AddOnsList = () => {
 
-    const { addOns, planType } = useAppSelector(selectFormDetails)
-    const dispatch = useAppDispatch()
+    const { form: { addOns, planType }, setAddOns } = useFormContext()
 
-    // Get saved form details on mount
-    useEffect(() => {
-        dispatch(setSavedFormDetails())
-    }, [dispatch])
+    const toggleAddOn = (addOnName: AddOnName) => {
 
-    const toggleAddOn = (addOn: AddOn) => {
+        const isAlreadyAdded = addOns.includes(addOnName)
 
-        const isAlreadyAdded = addOns.some(({ name }) => name === addOn.name)
-
-        let updatedAddOns: AddOn[]
+        let updatedAddOns: AddOnName[]
 
         if (isAlreadyAdded) {
-            updatedAddOns = addOns.filter(({ name }) => name !== addOn.name)
+            updatedAddOns = addOns.filter((name) => name !== addOnName)
         }
         else {
-            updatedAddOns = [...addOns, addOn]
+            updatedAddOns = [...addOns, addOnName]
         }
 
-        dispatch(setAddOns(updatedAddOns))
+        setAddOns(updatedAddOns)
     }
 
     return (
@@ -39,7 +31,7 @@ const AddOnsList = () => {
                 <AddOnBox
                     key={addOn.name}
                     addOn={addOn}
-                    isChecked={addOns.some(({ name }) => name === addOn.name)}
+                    isChecked={addOns.includes(addOn.name)}
                     planType={planType}
                     toggleAddOn={toggleAddOn}
                 />
